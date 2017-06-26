@@ -8,9 +8,15 @@ const app = express();
 //args
 // 1: the route to respond to
 // 2: a callback with request and response args
-app.get('/', (request, response) => {
-  response.send('sup!');
+app.get('/', (req, res) => {
+  res.send('<h1>Sup!</h1>');
 });
 
-app.listen(3000);
+app.get('/hello', (req, res) => {
+  res.send('<h2>Hey there Express Dev</h2>');
+});
+
+app.listen(3000, () => {
+           console.log("The app is runnin on port 3000");
+});
 //set app to listen on port 3000 for web requests
