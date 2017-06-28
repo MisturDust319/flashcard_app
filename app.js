@@ -4,6 +4,10 @@ const express = require('express');
 const app = express();
 //create a simple express app
 
+app.set('view engine', 'pug');
+//set pug as the templating engine.
+//it will now look for templates in the views folder
+
 //this is the routing setup for node/express
 //args
 // 1: the route to respond to
