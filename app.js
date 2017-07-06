@@ -17,7 +17,13 @@ app.get('/', (req, res) => {
 });
 
 app.get('/hello', (req, res) => {
-  res.send('<h2>Hey there Express Dev</h2>');
+  res.render('hello');
+});
+
+//this is for when posting to form
+app.post('/hello', (req, res) => {
+	console.dir(req);
+	res.render('hello');
 });
 
 app.get('/cards', (req, res) => {
