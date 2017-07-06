@@ -1,8 +1,11 @@
 const express = require('express');
 //include express
+const bodyParser = require('body-parser');
 
 const app = express();
 //create a simple express app
+//
+app.use(bodyParser.urlencoded({ extended: false}));
 
 app.set('view engine', 'pug');
 //set pug as the templating engine.
@@ -22,7 +25,7 @@ app.get('/hello', (req, res) => {
 
 //this is for when posting to form
 app.post('/hello', (req, res) => {
-	console.dir(req);
+	console.dir(req.body);
 	res.render('hello');
 });
 
