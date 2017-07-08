@@ -18,18 +18,29 @@ app.set('view engine', 'pug');
 // 1: the route to respond to
 // 2: a callback with request and response args
 app.get('/', (req, res) => {
-  res.send('<h1>Sup!</h1>');
+	//note since name would be passed as an obj prop
+	//	'name', you can ES6 shorthand of just { name }
+	const name = req.cookies.username;
+	//if name cookie defined, go to index
+	//otherwise...
+	if(name) {
+		res.render('index',
+	  		{ name });
+	}
+	//redirect to login
+	else {
+		res.redirect('/hello');
+	}
 });
 
 app.get('/hello', (req, res) => {
-  res.render('hello',
-  		{ name : req.cookies.username });
+  res.render('hello');
 });
 
 //this is for when posting to form
 app.post('/hello', (req, res) => {
 	res.cookie('username', req.body.username);
-	res.render('hello', { name : req.body.username });
+	res.redirect('/');
 });
 
 app.get('/cards', (req, res) => {
