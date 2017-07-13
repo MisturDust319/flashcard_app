@@ -33,12 +33,22 @@ app.get('/', (req, res) => {
 	}
 });
 
+app.post('/goodbye', (req, res) => {
+	//clear username cookie
+	res.clearCookie('username');
+	//go to login page at route /hello
+	//
+	res.redirect('/hello');
+})
+
 app.get('/hello', (req, res) => {
   res.render('hello');
 });
 
 //this is for when posting to form
 app.post('/hello', (req, res) => {
+	//note since name would be passed as an obj prop
+	//	'name', you can ES6 shorthand of just { name }=> {
 	res.cookie('username', req.body.username);
 	res.redirect('/');
 });
