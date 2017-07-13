@@ -42,7 +42,12 @@ app.post('/goodbye', (req, res) => {
 })
 
 app.get('/hello', (req, res) => {
-  res.render('hello');
+	const name = req.cookies.username;
+
+	if(name)
+		res.redirect('/');
+	else
+		res.render('hello');
 });
 
 //this is for when posting to form
