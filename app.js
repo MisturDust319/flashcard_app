@@ -21,7 +21,10 @@ app.use((req, res, next) => {
 
 app.use((req, res, next) => {
 	console.log(req.message);
-	next();
+	const err = new Error('Oh noes!');
+	err.status = 500;
+	//set error status to 500
+	next(err);
 });
 
 //this is the routing setup for node/express
@@ -74,6 +77,14 @@ app.get('/cards', (req, res) => {
 	res.locals.hint = "Think about whose tomb it is.";
 	res.render('card');
 });
+
+app.use((err, req, res, next) => {
+	res.locals.error = err;
+	//set response status to whatever err.status is
+	res.status(err.status);
+	res.render('error');
+	//pass error data to the template as err
+})
 
 app.listen(3000, () => {
            console.log("The app is runnin on port 3000");
