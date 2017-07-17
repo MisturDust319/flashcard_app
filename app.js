@@ -12,6 +12,17 @@ app.use(cookieParser());
 app.set('view engine', 'pug');
 //set pug as the templating engine.
 //it will now look for templates in the views folder
+//\
+
+app.use((req, res, next) => {
+	req.message = "A message to you, Rudy";
+	next();
+});
+
+app.use((req, res, next) => {
+	console.log(req.message);
+	next();
+});
 
 //this is the routing setup for node/express
 //args
