@@ -15,8 +15,11 @@ app.set('view engine', 'pug');
 //
 
 //import routes from sub folder
-const routes = require('./routes');
-app.use(routes);
+const mainRoutes = require('./routes');
+const cardRoutes = require('./routes/cards');
+//use the routes
+app.use(mainRoutes);
+app.use('/cards', cardRoutes);
 
 
 //this is the 404 event handler
