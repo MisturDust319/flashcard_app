@@ -10,9 +10,12 @@ const { cards } = data; //equiv to cards = data.cards
 //because of how the middleware is set up in app.js
 //all traffic defaults to /routes/cards
 //so, the root route is already /routes/cards(.js)
-router.get('/', (req, res) => {
-	res.locals.prompt = cards[0].question;
-	res.locals.hint = cards[0].hint;
+//the :id allows the value trailing after the route
+//	to be treated like a var, stored in req.params obj
+//	
+router.get('/:id', (req, res) => {
+	res.locals.prompt = cards[req.params.id].question;
+	res.locals.hint = cards[req.params.id].hint;
 	res.render('card');
 });
 
