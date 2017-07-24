@@ -31,7 +31,7 @@ app.use((req, res, next) => {
 	next(err);
 });
 
-/*
+
 app.use((err, req, res, next) => {
 	res.locals.error = err;
 	//set response status to whatever err.status is
@@ -39,7 +39,7 @@ app.use((err, req, res, next) => {
 	res.render('error');
 	//pass error data to the template as err
 });
-*/
+
 app.listen(3000, () => {
     console.log("The app is runnin on port 3000");
 });

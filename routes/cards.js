@@ -22,22 +22,33 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
 	const {side} = req.query;
 	const {id} = req.params;
-	const text = cards[id][side];
-	const {hint} = cards[id];
-	const templateData = {
-		text, id
-	};
-	//templateData.text = text
-	
-	//get the flip side data
-	templateData.flipSide = (side === 'question') ? 'answer' : 'question';
-
-
-	if(side === "question") {
-		templateData.hint = hint;
+	//default to question side if no param is passed
+	if(side === undefined) {
+		res.redirect(`/cards/${id}?side=question`);
 	}
+	else if (side === "question" || side === "answer")
+	{
+		const text = cards[id][side];
+		const {hint} = cards[id];
+		const templateData = {
+			text, id
+		};
+		//templateData.text = text
 
-	res.render('card', templateData);
+		//get the flip side data
+		templateData.flipSide = (side === 'question') ? 'answer' : 'question';
+
+		//only add hint if getting a question
+		if(side === "question") {
+			templateData.hint = hint;
+		}
+
+		res.render('card', templateData);
+	}
+	else {
+			//if nothing works, just pick random card
+			res.redirect('/cards/');
+	}
 });
 
 
