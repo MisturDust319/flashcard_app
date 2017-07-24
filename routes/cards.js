@@ -10,25 +10,8 @@ const { cards } = data; //equiv to cards = data.cards
 //if given a plain route, give a random card
 //
 router.get('/', (req, res) => {
-	const side = 'question';
 	const id = Math.floor(Math.random() * (cards.length - 1));
-	//get a random id, range: 0 to number of cards, minus 1
-	const text = cards[id][side];
-	const {hint} = cards[id];
-	const templateData = {
-		text, id
-	};
-	//templateData.text = text
-	
-	//get the flip side data
-	templateData.flipSide = (side === 'question') ? 'answer' : 'question';
-
-
-	if(side === "question") {
-		templateData.hint = hint;
-	}
-
-	res.render('card', templateData);
+	res.redirect(`/cards/${id}?side=question`);
 });
 
 //because of how the middleware is set up in app.js
