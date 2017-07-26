@@ -28,10 +28,13 @@ router.get('/:id', (req, res) => {
 	}
 	else if (side === "question" || side === "answer")
 	{
+		//get name from cookies
+		const name = req.cookies.username;
+		console.log(`name: ${name}`);
 		const text = cards[id][side];
 		const {hint} = cards[id];
 		const templateData = {
-			text, id
+			text, id, name
 		};
 		//templateData.text = text
 
