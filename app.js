@@ -8,6 +8,8 @@ const app = express();
 //
 app.use(bodyParser.urlencoded({ extended: false}));
 app.use(cookieParser());
+app.use('/static', express.static('public'));
+//this will make static asssets available under the static route
 
 app.set('view engine', 'pug');
 //set pug as the templating engine.
